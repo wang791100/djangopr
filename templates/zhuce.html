@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <form method="POST" action="">
+        <div id="login-box">
+            <h1>注册</h1>
+            <div class="form">
+                <div class="em" id="em">
+                {% if msg %}
+                        <span style="color: red">{{ msg }}</span>
+                {% endif %}
+                </div>
+                <div class="item">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <input type="text" placeholder="username" name="zc_username">
+                </div>
+                <div class="item">
+                    <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    <input type="password" placeholder="password" name="zc_password">
+                </div>
+                <div class="item">
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                    <input type="phone" placeholder="phone" name="zc_phone">
+                </div>
+                <div class="item">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <input type="email" placeholder="email" name="zc_email">
+                </div>
+            </div>
+            <button>register</button>
+        </div>
+    </form>
+</body>
+<script>
+    var em = document.getElementById('em');
+    var pass = {{ pass }}
+    if(em.style.display==''){
+        setTimeout(function (){
+            em.style.display = 'none';
+        },10000)
+    }
+    function jump(){
+        window.location.href = {% url 'login' %}
+    }
+    if (pass == 1){
+        setTimeout(jump,3000)
+    }
+</script>
+</html>
+{% endblock %}
