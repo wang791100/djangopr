@@ -34,6 +34,11 @@ class PurchaseType(models.Model):
     purchase_name = models.ManyToManyField(Purchase)
 
 
+class PurchaseColour(models.Model):
+    """颜色"""
+    colour = models.CharField('颜色', max_length=10, blank=True)
+
+
 class PurchaseSKU(models.Model):
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     purchase_type = models.ForeignKey(PurchaseType, on_delete=models.CASCADE)
