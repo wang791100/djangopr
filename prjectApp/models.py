@@ -37,6 +37,7 @@ class PurchaseType(models.Model):
 class PurchaseColour(models.Model):
     """颜色"""
     colour = models.CharField('颜色', max_length=10, blank=True)
+    purchase_colour = models.ManyToManyField(Purchase)
 
 
 class PurchaseSKU(models.Model):
