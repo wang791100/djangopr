@@ -19,6 +19,19 @@
           .newbg{
               background: #ffb301;
           }
+          .new1bg{
+              background: black;
+          }
+          .new2bg{
+              background: black;
+          }
+          .new3bg{
+              background: black;
+          }
+          .new4bg{
+              background: black;
+          }
+
       </style>
   </head>
   {% extends 'base.html' %}
@@ -28,14 +41,16 @@
   <div style="float: left;width: 10%;z-index: 100">
       <div style="height: 40px;border: solid 1px" id="nanzhuang" onmouseover="myfun()" onmouseout="myfu()"><a href="">男装</a></div>
       <div style="height: 40px;border: solid 1px" id="nvzhuang" onmouseover="myfun1()" onmouseout="myfu1()"><a href="">女装</a></div>
-      <div style="height: 40px;border: solid 1px"><a href="">美妆</a></div>
-      <div style="height: 40px;border: solid 1px"><a href="">数码</a></div>
-      <div style="height: 40px;border: solid 1px"><a href="">儿童</a></div>
+      <div style="height: 40px;border: solid 1px" id="meizhuang" onmouseover="myfun2()" onmouseout="myfu2()"><a href="">美妆</a></div>
+      <div style="height: 40px;border: solid 1px" id="shuma" onmouseover="myfun3()" onmouseout="myfu3()"><a href="">数码</a></div>
+      <div style="height: 40px;border: solid 1px" id="ertong" onmouseover="myfun4()" onmouseout="myfu4()"><a href="">儿童</a></div>
   </div>
   <div style="width: 90%;border: solid 1px;">
-      <div style="display: none;background: #ffb301;opacity: 0.6;height: 360px;width:45%;z-index: 100;margin-left: 109px;position: absolute" id="xianshi1" onmouseover="leibie()" onmouseout="leibi()">
-
-      </div>
+      <div style="display: none;background: white;opacity: 0.6;height: 360px;width:45%;z-index: 100;margin-left: 109px;position: absolute" id="xianshi1" onmouseover="leibie()" onmouseout="leibi()"><a href="">上衣</a></div>
+      <div style="display: none;background: white;opacity: 0.6;height: 360px;width:45%;z-index: 100;margin-left: 109px;position: absolute" id="xianshi2" onmouseover="leibie1()" onmouseout="leibi1()"></div>
+      <div style="display: none;background: white;opacity: 0.6;height: 360px;width:45%;z-index: 100;margin-left: 109px;position: absolute" id="xianshi3" onmouseover="leibie2()" onmouseout="leibi2()"></div>
+      <div style="display: none;background: white;opacity: 0.6;height: 360px;width:45%;z-index: 100;margin-left: 109px;position: absolute" id="xianshi4" onmouseover="leibie3()" onmouseout="leibi3()"></div>
+      <div style="display: none;background: white;opacity: 0.6;height: 360px;width:45%;z-index: 100;margin-left: 109px;position: absolute" id="xianshi5" onmouseover="leibie4()" onmouseout="leibi4()"></div>
      <div style="height: 400px">
          <img src="/static/img/momo1.jpg" style="width: 88%;height: 100%;">
      </div>
