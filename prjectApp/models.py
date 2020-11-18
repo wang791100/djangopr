@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
-
+import django.utils.timezone as timezone
 
 # Create your models here.
 
@@ -11,7 +11,7 @@ from django.contrib.auth.hashers import make_password, check_password
 class jiangpin(models.Model):
     name = models.CharField('奖品名称', max_length=30, blank=True, help_text='奖品名称')
     user = models.CharField('获奖者', max_length=20, blank=True, help_text='获奖人')
-    date = models.DateTimeField('获奖时间', auto_now_add=True)
+    date = models.DateTimeField('获奖时间', default=timezone.now)
 
 
 class User(AbstractUser):
