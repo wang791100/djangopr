@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls import url
 from prjectApp import views
 
@@ -12,4 +13,9 @@ urlpatterns = [
     url(r'^choujiang/',views.choujiang,name='choujiang'),
     url(r'^chongzhi/', views.chongzhi, name='chongzhi'),
     url(r'^zhuce/', views.zhuce, name='zhuce'),
+
+
+    ###商品###
+    url(r'^shangyi/', views.shangyi, name='shangyi'),
+
 ]
