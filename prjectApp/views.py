@@ -145,3 +145,7 @@ def chongzhi(request):
 
 def manage(request):
     return render(request, 'manage.html', {})
+
+
+def shangyi(request):
+    return render(request,'shangyi.html',{})
