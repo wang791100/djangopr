@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib.auth.hashers import make_password
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
+from models import Purchase
 import requests
 import json
 
@@ -28,6 +30,7 @@ def login(request):
         user_obj = authenticate(username=username, password=password)
         if user_obj:
             print(username, password)
+            request.session['username'] = request.POST.get('username')
             auth.login(request, user_obj)
             return redirect('/')
         else:
@@ -38,6 +41,7 @@ def login(request):
 
 
 def logout(request):
+    request.session.flush()
     auth.logout(request)
     return redirect('/')
 
@@ -66,7 +70,10 @@ def zhuce(request):
             return render(request, 'zhuce.html', {'msg': msg})
         else:
             User.objects.create(username=username, password=make_password(password), phone=phone, email=email, count=10, time=1)
-            msg = '注册成功'
+            msg = '注册成功..自动登录中'
+            user_obj = authenticate(username=username, password=password)
+            request.session['username'] = request.POST.get('username')
+            auth.login(request, user_obj)
             return render(request, 'zhuce.html', {'msg': msg, 'pass': 1})
     return render(request, 'zhuce.html', {})
 
@@ -112,7 +119,7 @@ def choujiang(request):
             us.count = count
             us.save()
         count = request.user.count
-        return render(request, 'choujiang.html', {'count': count})
+        return render(request, 'choujiang.html', {'count': count,})
     else:
         return render(request, 'choujiang.html', {'count': count})
 
@@ -149,3 +156,10 @@ def manage(request):
 
 def shangyi(request):
     return render(request,'shangyi.html',{})
+
+def goods(request):
+
+    goods = Purchase.objects.all()
+
+
+    paginnator = Paginator(goods,per_page=10)
