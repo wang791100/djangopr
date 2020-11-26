@@ -36,7 +36,8 @@ def login(request):
         else:
             print('error')
             msg = '账号或密码不正确请重新输入'
-            return render(request, 'login.html', {'msg': msg})  ##return HttpResponse(json.dumps({'code': 403, 'status': '用户名密码错误！'}))
+            return render(request, 'login.html',
+                          {'msg': msg})  ##return HttpResponse(json.dumps({'code': 403, 'status': '用户名密码错误！'}))
     return render(request, 'login.html', {})
 
 
@@ -69,7 +70,8 @@ def zhuce(request):
             msg = '已存在用户'
             return render(request, 'zhuce.html', {'msg': msg})
         else:
-            User.objects.create(username=username, password=make_password(password), phone=phone, email=email, count=10, time=1)
+            User.objects.create(username=username, password=make_password(password), phone=phone, email=email, count=10,
+                                time=1)
             msg = '注册成功..自动登录中'
             user_obj = authenticate(username=username, password=password)
             request.session['username'] = request.POST.get('username')
@@ -97,6 +99,8 @@ def choujiang(request):
         name = json.loads(jpdc)['JP']
         print(name)
         count = request.user.count
+        # if count < 10:
+        #     return HttpResponse(json.dumps({'code': 30001}))
         if len(name.split(',')) != 1:
             for i in name.split(','):
                 us = request.user
@@ -119,7 +123,7 @@ def choujiang(request):
             us.count = count
             us.save()
         count = request.user.count
-        return render(request, 'choujiang.html', {'count': count,})
+        return render(request, 'choujiang.html', {'count': count})
     else:
         return render(request, 'choujiang.html', {'count': count})
 
@@ -155,11 +159,10 @@ def manage(request):
 
 
 def shangyi(request):
-    return render(request,'shangyi.html',{})
+    return render(request, 'shangyi.html', {})
+
 
 def goods(request):
-
     goods = Purchase.objects.all()
 
-
-    paginnator = Paginator(goods,per_page=10)
+    paginnator = Paginator(goods, per_page=10)

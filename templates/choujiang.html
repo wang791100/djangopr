@@ -83,8 +83,6 @@
     $('.new-cj1').click(function () {
         if(count>0) {
             li.push($('.txt')[Math.floor(Math.random() * 10)])
-            alert('获得:' + li[li.length - 1].innerHTML)
-            window.location.reload()
             $.ajax({
                 {#            {#url:'{% url "choujiang" %}',#}
                 url: '',
@@ -95,6 +93,8 @@
                     'JP': li[li.length - 1].innerHTML
                 }),
             })
+            alert('获得:' + li[li.length - 1].innerHTML)
+            window.location.reload()
         }
         else {
             alert('次数不足请充值')
@@ -106,8 +106,6 @@
                 st = $('.txt')[Math.floor(Math.random() * 10)].innerHTML + ',' + st
             }
             st = st.substring(0, st.lastIndexOf(','));
-            alert(st)
-            window.location.reload(true)
             $.ajax({
                 {#            {#url:'{% url "choujiang" %}',#}
                 url: '',
@@ -118,6 +116,9 @@
                     'JP': st
                 }),
             })
+            alert(st)
+            window.location.reload()
+            {#count = count - st.length#}
             st = ''
         }
         else {
