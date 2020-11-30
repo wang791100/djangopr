@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from models import Purchase
+from models import PurchaseType,Purchase
 import requests
 import json
 
@@ -158,11 +158,18 @@ def manage(request):
     return render(request, 'manage.html', {})
 
 
-def shangyi(request):
-    return render(request, 'shangyi.html', {})
+def loadinfo(request):
+    context = {}
+    context['types'] = PurchaseType.objects.all()
+    return context
 
+def lists(request,page=1):
+    return HttpResponse("商品列表")
 
-def goods(request):
-    goods = Purchase.objects.all()
-
-    paginnator = Paginator(goods, per_page=10)
+def detail(request,gid):
+    context = loadinfo(request)
+    ob = Purchase.objects.get(id=gid)
+    ob.clicknum += 1
+    ob.save()
+    context['goods'] = ob
+    return render(request,'detail.html',context)

@@ -26,7 +26,8 @@ class Purchase(models.Model):
     details = models.CharField('商品描述', max_length=50)
     price = models.FloatField('商品价格')
     number = models.IntegerField(verbose_name='剩余数量')
-
+    clicknum = models.IntegerField('用户点击量',default=0)
+    picname = models.ImageField(upload_to='static/img',verbose_name='商品图片',blank=True)
 
 class PurchaseType(models.Model):
     """产品类别"""

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% extends 'index.html'  %}
+{% block content %}
+<body>
+    <div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="/{{ goods.picname }}" alt="..." style="width: 300px;height: 300px">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{ goods.name }}</h4>
+    {{ goods.details }}
+  </div>
+</div>
+</body>
+</html>
+{% endblock %}

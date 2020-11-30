@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from prjectApp.models import User,Purchase
+from prjectApp.models import User,Purchase,PurchaseType
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 # admin.site.register(User)
@@ -25,5 +25,5 @@ class UserAdmin(UserAdmin):
             )
         }),
     )
-
+admin.site.register(PurchaseType)
 admin.site.register(Purchase)

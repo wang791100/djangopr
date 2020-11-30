@@ -16,6 +16,8 @@ urlpatterns = [
 
 
     ###商品###
-    url(r'^shangyi/', views.shangyi, name='shangyi'),
+    url(r'^list$',views.lists,name='list'),
+    url(r'^list/(?P<page>[0-9]+)$', views.lists, name='shangyi'),
+    url(r'^detail/(?P<gid>[0-9]+)$',views.detail,name='detail')
 
 ]
