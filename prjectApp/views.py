@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib.auth.hashers import make_password
-from django.core.paginator import Paginator
-from django.http import HttpResponse
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage, InvalidPage
+from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from models import PurchaseType,Purchase
@@ -164,7 +164,25 @@ def loadinfo(request):
     return context
 
 def lists(request,page=1):
-    return HttpResponse("商品列表")
+    goods = Purchase.objects.all()
+
+    #分页
+    paginator = Paginator(goods,per_page=9)
+    try:
+        goods = paginator.page(page)  # 获取指定页的商品记录
+    except PageNotAnInteger:
+        # 如果请求的页面不是证书,返回第一页.
+        goods = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页面不在合法的页面范围内,返回结果的最后一页.
+        goods = paginator.page(paginator.num_pages)
+    except InvalidPage:
+        # 如果请求的页面不存在,重定向页面.
+        raise Http404('请求的页面不存在')
+        # return HttpResponse('找不到页面的内容')
+
+
+    return render(request,'list.html',context={'goods':goods,'paginator':paginator})
 
 def detail(request,gid):
     context = loadinfo(request)
@@ -172,4 +190,5 @@ def detail(request,gid):
     ob.clicknum += 1
     ob.save()
     context['goods'] = ob
+
     return render(request,'detail.html',context)

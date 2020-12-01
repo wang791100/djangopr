@@ -12,7 +12,7 @@ class UserAdmin(UserAdmin):
     fieldsets = (
         ('基础设置', {
             'fields': (
-                'username','password','count','time'
+                'username','password','count','time',
             )
         }),
     )
@@ -25,5 +25,34 @@ class UserAdmin(UserAdmin):
             )
         }),
     )
-admin.site.register(PurchaseType)
-admin.site.register(Purchase)
+@admin.register(PurchaseType)
+class PurchaseTypeAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('基础设置', {
+            'fields': (
+                'name',
+            )
+        }),
+    )
+    list_display = ('name', )
+
+
+
+@admin.register(Purchase)
+class PurchaseAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('基础设置', {
+            'fields': (
+                'name', 'details','price','number','clicknum','picname','type'
+            )
+        }),
+    )
+    list_display = ('name', 'details','price','number')
+
+    add_fieldsets = (
+        ('基础设置', {
+            'fields': (
+                'type'
+            )
+        }),
+    )

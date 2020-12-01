@@ -20,6 +20,16 @@ class User(AbstractUser):
     phone = models.CharField(verbose_name='电话号码', max_length=15, null=False, default=12345678910)
 
 
+class PurchaseType(models.Model):
+    """产品类别"""
+    name = models.CharField(u'产品类别', max_length=20, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = verbose_name_plural = '产品类别'
+
 class Purchase(models.Model):
     """商品信息"""
     name = models.CharField(u'商品名称', max_length=30, blank=True)
@@ -28,11 +38,16 @@ class Purchase(models.Model):
     number = models.IntegerField(verbose_name='剩余数量')
     clicknum = models.IntegerField('用户点击量',default=0)
     picname = models.ImageField(upload_to='static/img',verbose_name='商品图片',blank=True)
+    type = models.ManyToManyField(PurchaseType,verbose_name='产品类型')
 
-class PurchaseType(models.Model):
-    """产品类别"""
-    name = models.CharField(u'产品类别', max_length=20, blank=True)
-    purchase_name = models.ManyToManyField(Purchase)
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = verbose_name_plural = '商品信息'
+
+
+
 
 
 class PurchaseColour(models.Model):

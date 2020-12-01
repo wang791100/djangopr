@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% extends 'index.html' %}
+{% block content %}
+<body>
+<div class="row">
+    {% for good in goods.object_list %}
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="/{{ good.picname }}" alt="..." style="width: 220px;height: 220px">
+      <div class="caption">
+        <h3>{{ good.name }}</h3>
+        <p>{{ good.details }}</p>
+        <p><a href="{% url 'detail' good.id %}" class="btn btn-primary" role="button">详情</a> </p>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+<nav aria-label="Page navigation example" style="margin-left: 35%">
+  <ul class="pagination">
+    {% if goods.has_previous %}
+            <li class="page-item"><a class="page-link" href="{% url 'list' goods.previous_page_number %}">Previous</a></li>
+    {% else %}
+            <li class="disabled"><a class="page-link" href="">Previous</a></li>
+    {% endif %}
+      {% for page in paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="{% url 'list' page %}">{{ page }}</a></li>
+      {% endfor %}
+    {% if goods.has_next %}
+            <li class="page-item"><a class="page-link" href="{% url 'list' goods.next_page_number  %}">Next</a></li>
+    {% else %}
+            <li class="disabled"><a class="page-link" href="">Next</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+
+<script src="/static/JS/jquery-1.11.0.min.js"></script>
+</body>
+</html>
+{% endblock %}
